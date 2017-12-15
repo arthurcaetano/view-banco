@@ -1,0 +1,28 @@
+<ion-header>
+  
+    <ion-navbar>
+      <ion-title>Cadastro de banco</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <ion-item>
+      <ion-label floating> Descricao </ion-label>
+      <ion-input [(ngModel)]="banco.Descricao" id="descricao" autofocus required> </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating> Agência </ion-label>
+      <ion-input [(ngModel)]="banco.Agencia"> </ion-input>
+    </ion-item>
+  
+  </ion-content>
+
+  <ion-footer>
+    <div padding class="barra-ferramentas">
+      <button ion-button color="light" (click)="cancelar()">Cancelar</button>
+      <button ion-button (click)="gravar()">Gravar</button>
+    </div>
+  </ion-footer>

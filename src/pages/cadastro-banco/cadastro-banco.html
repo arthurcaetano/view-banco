@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Banco</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <button ion-item *ngFor="let banco of bancos">
+      <ion-icon name="md-home" item-start></ion-icon>
+      {{banco.Descricao}}
+      <ion-icon name="md-create" item-end title="Editar" (click)="editar(banco)"></ion-icon>
+      <ion-icon name="md-trash" item-end title="Excluir" (click)="excluir(banco)"></ion-icon>
+    </button>
+  </ion-list>
+
+  <ion-fab right bottom (click)="adicionarBanco()">
+    <button ion-fab color="secondary">
+      <ion-icon name="md-add"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>
