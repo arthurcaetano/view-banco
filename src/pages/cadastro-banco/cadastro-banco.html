@@ -9,7 +9,7 @@
   <ion-list>
     <button ion-item *ngFor="let banco of bancos">
       <ion-icon name="md-home" item-start></ion-icon>
-      {{banco.Descricao}}
+      {{banco.Agencia}} - {{banco.Descricao}}
       <ion-icon name="md-create" item-end title="Editar" (click)="editar(banco)"></ion-icon>
       <ion-icon name="md-trash" item-end title="Excluir" (click)="excluir(banco)"></ion-icon>
     </button>

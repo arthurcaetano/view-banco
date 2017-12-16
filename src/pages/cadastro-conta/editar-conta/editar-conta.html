@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Cadastro de conta</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label>Banco</ion-label>
+    <ion-select [(ngModel)]="bancoSelecionada" interface='action-sheet'>
+      <ion-option *ngFor="let banco of bancos" value="{{banco.Id}}">{{banco.Descricao}}</ion-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label floating> Titular </ion-label>
+    <ion-input [(ngModel)]="conta.Titular" required> </ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label floating> Número </ion-label>
+    <ion-input [(ngModel)]="conta.Numero"> </ion-input>
+  </ion-item>
+  
+</ion-content>
+
+<ion-footer>
+  <div padding class="barra-ferramentas">
+    <button ion-button color="light" (click)="cancelar()">Cancelar</button>
+    <button ion-button (click)="gravar()">Gravar</button>
+  </div>
+</ion-footer>
