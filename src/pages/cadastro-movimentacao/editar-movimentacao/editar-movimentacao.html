@@ -63,12 +63,10 @@
           <ion-icon *ngIf="movimentacao.Tipo == 'Saida'" name="md-remove-circle"></ion-icon>
           {{movimentacao.Valor}},00
         </ion-label>
-
+        
+        <div style="float: right;">{{movimentacao.Data | data}}</div>
+        
       </ion-card-content>
-
-      <ion-item>
-        <p item-end>{{movimentacao.Data | data}}</p>
-      </ion-item>
 
     </ion-card>
   </div>

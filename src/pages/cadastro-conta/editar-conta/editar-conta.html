@@ -11,7 +11,7 @@
 
   <ion-item>
     <ion-label>Banco</ion-label>
-    <ion-select [(ngModel)]="bancoSelecionada" interface='action-sheet'>
+    <ion-select [(ngModel)]="bancoSelecionado" interface='action-sheet'>
       <ion-option *ngFor="let banco of bancos" value="{{banco.Id}}">{{banco.Descricao}}</ion-option>
     </ion-select>
   </ion-item>

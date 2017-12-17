@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController, Events } from 'ion
 import { DialogoProvider } from '../../../providers/dialogo/dialogo';
 import { Conta } from '../../../models/conta';
 import { Banco } from '../../../models/banco';
+import { ComunicacaoBancoProvider } from '../../../providers/comunicacao-banco/comunicacao-banco';
 
 @IonicPage()
 @Component({
@@ -12,30 +13,29 @@ import { Banco } from '../../../models/banco';
 export class EditarContaPage {
 
   conta: Conta;
-  bancoSelecionado: string;
-
-  bancos: Banco[] = [{
-    Id: 1,
-    Descricao: 'Banco 1',
-    Agencia: 123456
-  },
-  {
-    Id: 2,
-    Descricao: 'Banco 2',
-    Agencia: 123456
-  }];
-
+  bancoSelecionado: number;
+  bancos: Banco[] = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public viewController: ViewController,
     public dialogo: DialogoProvider,
-    public events: Events) {
+    public events: Events,
+    private comunicacaoBanco: ComunicacaoBancoProvider) {
 
     this.conta = this.navParams.get('Conta');
 
     if (!this.conta) this.conta = new Conta();
+
+    this.comunicacaoBanco
+      .obtenha()
+      .then(bancos => {
+
+        this.bancos = bancos;
+
+        this.bancoSelecionado = this.conta.Banco.Id;
+      })
   }
 
   cancelar() {

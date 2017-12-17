@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ModalController, Events } from 'io
 import { Conta } from '../../models/conta';
 import { Banco } from '../../models/banco';
 import { DialogoProvider } from '../../providers/dialogo/dialogo';
+import { ComunicacaoContaProvider } from '../../providers/comunicacao-conta/comunicacao-conta';
 
 @IonicPage()
 @Component({
@@ -11,29 +12,29 @@ import { DialogoProvider } from '../../providers/dialogo/dialogo';
 })
 export class CadastroContaPage {
 
-  contas: Conta[] = [{
-    Id: 1,
-    Numero: 123,
-    Titular: 'Arthur Caetano',
-    Banco: {
-      Id: 1,
-      Descricao: 'Itaú',
-      Agencia: 1234568
-    }
-  }];
+  contas: Conta[] = [];
 
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     private dialogo: DialogoProvider,
-    private events: Events) {
+    private events: Events,
+    private comunicacao: ComunicacaoContaProvider) {
 
     this.events.subscribe('home:adicionarConta', (conta: Conta) => {
 
-      this.contas = this.contas.filter(a => a.Id != conta.Id);
+      this.comunicacao
+        .adicionar(conta)
+        .then(() => {
 
-      this.contas.push(conta);
+          this.carregarContas();
+        });
     });
+  }
+
+  ionViewDidEnter() {
+
+    this.carregarContas();
   }
 
   adicionar() {
@@ -56,10 +57,22 @@ export class CadastroContaPage {
       .exibaAlertaConfirme('Tem certeza que deseja remover a conta?')
       .then(() => {
 
-        this.contas = this.contas.filter(a => a.Id != conta.Id);
+        this.comunicacao
+          .remover(conta)
+          .then(() => {
+
+            this.contas = this.contas.filter(a => a.Id != conta.Id);
+          })
       })
       .catch(_ => _);
   }
 
+  private carregarContas() {
 
+    this.comunicacao
+      .obtenha()
+      .then(contas => {
+        this.contas = contas;
+      });
+  }
 }

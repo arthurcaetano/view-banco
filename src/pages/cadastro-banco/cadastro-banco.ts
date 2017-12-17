@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import { DialogoProvider } from '../../providers/dialogo/dialogo';
 import { Banco } from '../../models/banco';
+import { ComunicacaoBancoProvider } from '../../providers/comunicacao-banco/comunicacao-banco';
 
 @IonicPage()
 @Component({
@@ -10,29 +11,29 @@ import { Banco } from '../../models/banco';
 })
 export class CadastroBancoPage {
 
-  bancos: Banco[] = [{
-    Id: 1,
-    Descricao: 'Banco 1',
-    Agencia: 123456
-  },
-  {
-    Id: 2,
-    Descricao: 'Banco 2',
-    Agencia: 123456
-  }];
+  bancos: Banco[] = [];
 
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     private dialogo: DialogoProvider,
-    private events: Events) {
+    private events: Events,
+    private comunicacao: ComunicacaoBancoProvider) {
 
     this.events.subscribe('home:adicionarBanco', (banco: Banco) => {
 
-      this.bancos = this.bancos.filter(a => a.Id != banco.Id);
+      this.comunicacao
+        .adicionar(banco)
+        .then(() => {
 
-      this.bancos.push(banco);
+          this.carregarBancos();
+        });
     });
+  }
+
+  ionViewDidEnter() {
+
+    this.carregarBancos();
   }
 
   adicionarBanco() {
@@ -55,8 +56,22 @@ export class CadastroBancoPage {
       .exibaAlertaConfirme('Tem certeza que deseja remover o banco?')
       .then(() => {
 
-        this.bancos = this.bancos.filter(a => a.Id != banco.Id);
+        this.comunicacao
+          .remover(banco)
+          .then(() => {
+
+            this.bancos = this.bancos.filter(a => a.Id != banco.Id);
+          });
       })
       .catch(_ => _);
+  }
+
+  private carregarBancos() {
+
+    this.comunicacao
+      .obtenha()
+      .then(bancos => {
+        this.bancos = bancos;
+      });
   }
 }
