@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the EditarMovimentacaoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Movimentacao } from '../../../models/movimentacao';
 
 @IonicPage()
 @Component({
@@ -15,11 +9,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EditarMovimentacaoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  }
+  saldo: number = 1234656;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditarMovimentacaoPage');
+  movimentacao: Movimentacao = new Movimentacao();
+
+  movimentacoes: Movimentacao[] = [{
+    Id: 1,
+    Data: new Date(),
+    Valor: 150,
+    Descricao: 'supermercado',
+    Tipo: 'Entrada',
+    Conta: {
+      Id: 1,
+      Banco: {
+        Id: 1,
+        Agencia: 123,
+        Descricao: 'banco 1'
+      },
+      Numero: 1234,
+      Titular: 'Arthur Caetano'
+    }
+  }];
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams) {
   }
 
 }

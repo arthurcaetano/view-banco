@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the CadastroMovimentacaoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { Conta } from '../../models/conta';
 
 @IonicPage()
 @Component({
@@ -15,11 +9,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class CadastroMovimentacaoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  contas: Conta[] = [{
+    Id: 1,
+    Numero: 123,
+    Titular: 'Arthur Caetano',
+    Banco: {
+      Id: 1,
+      Descricao: 'Itaú',
+      Agencia: 1234568
+    }
+  }];
+
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad CadastroMovimentacaoPage');
+  movimentar(conta: Conta){
+
+    this.navCtrl.push('EditarMovimentacaoPage', { Conta: conta });
   }
 
 }

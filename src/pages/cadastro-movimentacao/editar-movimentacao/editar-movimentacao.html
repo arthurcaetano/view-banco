@@ -1,18 +1,74 @@
-<!--
-  Generated template for the EditarMovimentacaoPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>EditarMovimentacao</ion-title>
+    <ion-title>12345 - Arthur Caetano </ion-title>
+    <ion-title class="subtitulo">
+      Conta 1
+      <span id="saldo" style="float: right">${{saldo}}</span>
+    </ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+
+  <div class="movimentacoes">
+
+    <ion-card>
+
+      <ion-navbar class="nav-novo-movimentar">
+        <ion-title class="titulo-novo-comentario">Nova movimentação</ion-title>
+      </ion-navbar>
+
+      <ion-item>
+        <ion-label floating> Descrição </ion-label>
+        <ion-input [(ngModel)]="movimentacao.Descricao"> </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating> Valor </ion-label>
+        <ion-input [(ngModel)]="movimentacao.Valor"> </ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tipo</ion-label>
+        <ion-select [(ngModel)]="tipoMovimentacao">
+          <ion-option value="1">Entrada</ion-option>
+          <ion-option value="2">Saída</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-card-content>
+
+      </ion-card-content>
+
+      <ion-item>
+        <button class="botao-movimentar" item-end ion-button color="secondary" (click)="movimentar()">Registrar</button>
+      </ion-item>
+
+    </ion-card>
+
+    <ion-card *ngFor="let movimentacao of movimentacoes">
+
+      <ion-item>
+        <ion-label>{{movimentacao.Descricao}} ({{movimentacao.Tipo}})</ion-label>
+        <ion-icon name="md-trash" item-end title="Excluir" (click)="excluir(movimentacao)"></ion-icon>
+      </ion-item>
+
+      <ion-card-content>
+
+        <ion-label class="valor">
+          <ion-icon name="logo-usd"></ion-icon>
+          {{movimentacao.Valor}},00 
+        </ion-label>
+
+      </ion-card-content>
+
+      <ion-item>
+        <p item-end>{{movimentacao.Data | data}}</p>
+      </ion-item>
+
+    </ion-card>
+  </div>
 
 </ion-content>

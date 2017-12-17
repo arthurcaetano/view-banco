@@ -1,3 +1,50 @@
 page-editar-movimentacao {
-
+    .movimentacoes{
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .item-md p {
+        font-size: 1.2rem;
+    }
+    .botao-movimentar{
+        color: #fff;
+        background-color: #28a745;
+        background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
+    }
+    .button-md{
+        text-transform: initial;
+    }
+    .item-button{
+        height: 35px !important;
+        width: 88px;
+        font-size: 1.4rem !important;
+    }
+    .scroll-content{
+        background-color: #eaeaea;
+    }
+    .ion-md-trash{
+        color: #EF5350;
+        margin-left: 20px !important;
+        cursor: pointer;
+    }
+    .input{
+        border-bottom: 0.8px;
+        border-bottom-style: solid;
+        border-color: #dddcdc;
+    }
+    .item-select{
+        margin-top: 20px;
+        .button-inner{
+            border-bottom: 0.8px;
+            border-bottom-style: solid;
+            border-color: #dddcdc;
+            margin-left: 10px;
+        }
+    }
+    .ion-logo-usd{
+        color: #c5c57c;
+    }
+    .valor{
+        font-size: 1.5em;
+    }
 }

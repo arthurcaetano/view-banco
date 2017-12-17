@@ -9,21 +9,15 @@
   <ion-content padding>
   
     <ion-list>
-      <button ion-item *ngFor="let movimentacao of movimentacoes">
+      <button ion-item *ngFor="let conta of contas" (click)="movimentar(conta)">
         <ion-icon name="md-person" item-start></ion-icon>
   
         <ion-label>{{conta.Numero}} - {{conta.Titular}}</ion-label>
         <ion-label>{{conta.Banco.Descricao}}</ion-label>
+        <ion-label>Saldo $155,00</ion-label>
 
-        <ion-icon name="md-create" item-end title="Editar" (click)="editar(conta)"></ion-icon>
-        <ion-icon name="md-trash" item-end title="Excluir" (click)="excluir(conta)"></ion-icon>
+        <ion-icon name="md-calculator" item-end title="Movimentar"></ion-icon>
       </button>
     </ion-list>
-  
-    <ion-fab right bottom (click)="adicionar()">
-      <button ion-fab color="secondary">
-        <ion-icon name="md-add"></ion-icon>
-      </button>
-    </ion-fab>
   
   </ion-content>

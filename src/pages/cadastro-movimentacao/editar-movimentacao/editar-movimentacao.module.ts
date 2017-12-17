@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { EditarMovimentacaoPage } from './editar-movimentacao';
+import { PipesModule } from '../../../pipes/pipes.module';
 
 @NgModule({
   declarations: [
@@ -8,6 +9,7 @@ import { EditarMovimentacaoPage } from './editar-movimentacao';
   ],
   imports: [
     IonicPageModule.forChild(EditarMovimentacaoPage),
+    PipesModule
   ],
 })
 export class EditarMovimentacaoPageModule {}
