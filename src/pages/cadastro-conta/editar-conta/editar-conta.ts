@@ -15,6 +15,7 @@ export class EditarContaPage {
   conta: Conta;
   bancoSelecionado: number;
   bancos: Banco[] = [];
+  estaEditando: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -26,7 +27,13 @@ export class EditarContaPage {
 
     this.conta = this.navParams.get('Conta');
 
-    if (!this.conta) this.conta = new Conta();
+    if (!this.conta) {
+
+      this.conta = new Conta();
+    } else {
+
+      this.estaEditando = true;
+    }
 
     this.comunicacaoBanco
       .obtenha()
@@ -34,7 +41,8 @@ export class EditarContaPage {
 
         this.bancos = bancos;
 
-        this.bancoSelecionado = this.conta.Banco.Id;
+        if (this.estaEditando)
+          this.bancoSelecionado = this.conta.Banco.Id;
       })
   }
 

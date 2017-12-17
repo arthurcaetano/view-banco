@@ -9,11 +9,15 @@
 
 <ion-content padding>
 
-  <ion-item>
+  <ion-item *ngIf="!estaEditando">
     <ion-label>Banco</ion-label>
     <ion-select [(ngModel)]="bancoSelecionado" interface='action-sheet'>
       <ion-option *ngFor="let banco of bancos" value="{{banco.Id}}">{{banco.Descricao}}</ion-option>
     </ion-select>
+  </ion-item>
+  <ion-item *ngIf="estaEditando">
+    <ion-label floating> Banco </ion-label>
+    <ion-input disabled>{{conta.Banco.Descricao}}</ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating> Titular </ion-label>
