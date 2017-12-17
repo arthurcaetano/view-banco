@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Conta } from '../../models/conta';
+import { ComunicacaoContaProvider } from '../../providers/comunicacao-conta/comunicacao-conta';
 
 @IonicPage()
 @Component({
@@ -9,20 +10,23 @@ import { Conta } from '../../models/conta';
 })
 export class CadastroMovimentacaoPage {
 
-  contas: Conta[] = [{
-    Id: 1,
-    Numero: 123,
-    Titular: 'Arthur Caetano',
-    Banco: {
-      Id: 1,
-      Descricao: 'Itaú',
-      Agencia: 1234568
-    }
-  }];
+  contas: Conta[] = [];
 
   constructor(
     public navCtrl: NavController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private comunicacaoConta: ComunicacaoContaProvider) {
+  }
+
+
+  ionViewDidEnter() {
+
+    this.comunicacaoConta
+      .obtenha()
+      .then(contas => {
+
+        this.contas = contas;
+      });  
   }
 
   movimentar(conta: Conta){

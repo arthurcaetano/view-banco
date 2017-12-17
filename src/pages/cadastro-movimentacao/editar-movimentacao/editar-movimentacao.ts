@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Movimentacao } from '../../../models/movimentacao';
+import { ComunicacaoMovimentacaoProvider } from '../../../providers/comunicacao-movimentacao/comunicacao-movimentacao';
+import { DialogoProvider } from '../../../providers/dialogo/dialogo';
 
 @IonicPage()
 @Component({
@@ -32,8 +34,22 @@ export class EditarMovimentacaoPage {
   }];
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams) {
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private dialogo: DialogoProvider,
+    private comunicacaoMovimentacao: ComunicacaoMovimentacaoProvider) {
+  }
+
+  excluir(movimentacao: Movimentacao) {
+
+    this.dialogo
+      .exibaAlertaConfirme('Tem certeza que deseja remover a movimentação?')
+      .then(() => {
+
+        this.comunicacaoMovimentacao
+          .remover(movimentacao);
+      })
+      .catch(_ => _);
   }
 
 }

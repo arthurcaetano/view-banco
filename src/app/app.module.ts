@@ -13,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { DialogoProvider } from '../providers/dialogo/dialogo';
 import { ComunicacaoBancoProvider } from '../providers/comunicacao-banco/comunicacao-banco';
 import { ComunicacaoContaProvider } from '../providers/comunicacao-conta/comunicacao-conta';
+import { ComunicacaoMovimentacaoProvider } from '../providers/comunicacao-movimentacao/comunicacao-movimentacao';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ComunicacaoContaProvider } from '../providers/comunicacao-conta/comunic
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     DialogoProvider,
     ComunicacaoBancoProvider,
-    ComunicacaoContaProvider
+    ComunicacaoContaProvider,
+    ComunicacaoMovimentacaoProvider
   ]
 })
 export class AppModule { }
