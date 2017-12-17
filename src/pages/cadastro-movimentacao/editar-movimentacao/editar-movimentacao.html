@@ -51,15 +51,17 @@
     <ion-card *ngFor="let movimentacao of movimentacoes">
 
       <ion-item>
-        <ion-label>{{movimentacao.Descricao}} ({{movimentacao.Tipo}})</ion-label>
+        <ion-label>{{movimentacao.Descricao}} ({{movimentacao.Tipo}})
+        </ion-label>
         <ion-icon name="md-trash" item-end title="Excluir" (click)="excluir(movimentacao)"></ion-icon>
       </ion-item>
-
+      
       <ion-card-content>
-
+        
         <ion-label class="valor">
-          <ion-icon name="logo-usd"></ion-icon>
-          {{movimentacao.Valor}},00 
+          <ion-icon *ngIf="movimentacao.Tipo == 'Entrada'" name="md-add-circle"></ion-icon>
+          <ion-icon *ngIf="movimentacao.Tipo == 'Saida'" name="md-remove-circle"></ion-icon>
+          {{movimentacao.Valor}},00
         </ion-label>
 
       </ion-card-content>

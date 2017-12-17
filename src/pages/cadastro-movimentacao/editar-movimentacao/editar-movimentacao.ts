@@ -18,7 +18,7 @@ export class EditarMovimentacaoPage {
     Data: new Date(),
     Valor: 150,
     Descricao: 'supermercado',
-    Tipo: 'Entrada',
+    Tipo: 'Saida',
     Conta: {
       Id: 1,
       Banco: {

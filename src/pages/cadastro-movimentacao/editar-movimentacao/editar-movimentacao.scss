@@ -47,4 +47,17 @@ page-editar-movimentacao {
     .valor{
         font-size: 1.5em;
     }
+    .ion-md-add-circle{
+        color: green;
+        font-size: 1.4em;
+    }
+    .ion-md-remove-circle{
+        color: red;
+        font-size: 1.4em;
+    }
+    .subtitulo{
+        .toolbar-title{
+            font-size: 1.2em;
+        }
+    }
 }
