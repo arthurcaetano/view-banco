@@ -52,4 +52,27 @@ export class EditarMovimentacaoPage {
       .catch(_ => _);
   }
 
+  movimentar() {
+
+    // if (!this.movimentacao.) {
+
+    //   this.dialogo.exibaToastAlerta('Informe o banco da conta!');
+
+    //   return;
+    // }
+
+    this.comunicacaoMovimentacao
+      .adicionar(this.movimentacao)
+      .then(() => {
+
+        this.comunicacaoMovimentacao
+          .obtenha()
+          .then(movimentacoes => {
+
+            this.movimentacoes = movimentacoes;
+          });
+
+        this.movimentacao = new Movimentacao();
+      });
+  }
 }

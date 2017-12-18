@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { DialogoProvider } from '../dialogo/dialogo';
 import { Banco } from '../../models/banco';
 
-const urlApi = 'http://localhost:12026/tarefas';
+const urlApi = 'http://localhost:1888/bancos';
 
 @Injectable()
 export class ComunicacaoBancoProvider {
@@ -53,8 +53,12 @@ export class ComunicacaoBancoProvider {
       return this.http
         .post(urlApi, {
           id: banco.Id,
-          descricao: banco.Descricao,
-          agencia: banco.Agencia
+          nome: banco.Descricao,
+          agencias: [{
+            id: 0,
+            idBanco: 0,
+            codigo: banco.Agencia
+          }]
         })
         .toPromise()
         .then(resp => {
@@ -73,18 +77,33 @@ export class ComunicacaoBancoProvider {
 
     this.dialogo.exibaLoadingPadrao();
 
+    let servico = `${urlApi}/${banco.Id}`;
+
     return this.http
-      .put(urlApi, {
-        id: banco.Id,
-        descricao: banco.Descricao,
-        agencia: banco.Agencia
-      })
+      .get(servico)
       .toPromise()
-      .then(resp => {
+      .then((resp: any) => {
 
-        this.dialogo.removaLoading();
+        debugger;
+        let agencia = resp.agencias[0];
 
-        return resp;
+        return this.http
+          .put(urlApi, {
+            id: banco.Id,
+            nome: banco.Descricao,
+            agencias: [{
+              id: agencia.id,
+              idBanco: banco.Id,
+              codigo: banco.Agencia
+            }]
+          })
+          .toPromise()
+          .then(resp => {
+
+            this.dialogo.removaLoading();
+
+            return resp;
+          });
       });
   }
 
@@ -94,10 +113,12 @@ export class ComunicacaoBancoProvider {
 
     resp.forEach(t => {
 
+      let agencia = t.agencias[0];
+
       bancos.push({
         Id: t.id,
-        Descricao: 'Banco',
-        Agencia: 123
+        Descricao: t.nome,
+        Agencia: agencia ? agencia.codigo : 0
       });
     });
 

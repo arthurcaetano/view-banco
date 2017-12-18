@@ -53,6 +53,13 @@ export class EditarContaPage {
 
   gravar() {
 
+    if (!this.conta.Banco) {
+
+      this.dialogo.exibaToastAlerta('Informe o banco da conta!');
+
+      return;
+    }
+
     if (!this.conta.Titular) {
 
       this.dialogo.exibaToastAlerta('Informe o titular da conta!');
