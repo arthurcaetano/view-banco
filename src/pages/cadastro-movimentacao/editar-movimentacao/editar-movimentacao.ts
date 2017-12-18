@@ -93,7 +93,11 @@ export class EditarMovimentacaoPage {
       .obtenha(this.conta.Id)
       .then(movimentacoes => {
 
-        this.movimentacoes = movimentacoes;
+        this.movimentacoes = movimentacoes.sort(function (a, b) {
+
+          return b.Data.getTime() - a.Data.getTime();
+        });
+
         this.conta.Saldo = 0;
 
         this.movimentacoes.forEach(mov => {
