@@ -17,7 +17,7 @@
   </ion-item>
   <ion-item *ngIf="estaEditando">
     <ion-label floating> Banco </ion-label>
-    <ion-input disabled>{{conta.Banco.Descricao}}</ion-input>
+    <ion-input disabled value="{{conta.Banco.Descricao}}"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating> Titular </ion-label>
@@ -27,7 +27,7 @@
     <ion-label floating> Número </ion-label>
     <ion-input [(ngModel)]="conta.Numero"> </ion-input>
   </ion-item>
-  
+
 </ion-content>
 
 <ion-footer>
