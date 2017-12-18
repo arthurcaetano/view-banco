@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { DialogoProvider } from '../dialogo/dialogo';
 import { Movimentacao } from '../../models/movimentacao';
 
-const urlApi = 'http://localhost:12026/tarefas';
+const urlApi = 'http://localhost:1888/movimentacao';
+const urlApiConta = 'http://localhost:1888/contas';
 
 @Injectable()
 export class ComunicacaoMovimentacaoProvider {
@@ -18,8 +19,8 @@ export class ComunicacaoMovimentacaoProvider {
 
     this.dialogo.exibaLoadingPadrao();
 
-    let servico = `${urlApi}/${idConta}`;
-    
+    let servico = `${urlApiConta}/${idConta}`;
+
     return this.http
       .get(servico)
       .toPromise()
@@ -37,7 +38,12 @@ export class ComunicacaoMovimentacaoProvider {
 
     return this.http
       .post(urlApi, {
-        id: movimentacao.Id,
+        id: 0,
+        idConta: movimentacao.Conta.Id,
+        data: movimentacao.Data.toISOString(),
+        descricao: movimentacao.Descricao,
+        valor: movimentacao.Valor,
+        tipo: movimentacao.Tipo == 'Entrada' ? 1 : 2
       })
       .toPromise()
       .then(resp => {
@@ -69,9 +75,16 @@ export class ComunicacaoMovimentacaoProvider {
 
     let movimentacoes: Movimentacao[] = [];
 
-    resp.movimentacao.forEach(t => {
+    resp.movimentacao.forEach(mov => {
 
-      //movimentacoes.push();
+      movimentacoes.push({
+        Id: mov.id,
+        Data: new Date(mov.data),
+        Conta: null,
+        Descricao: mov.descricao,
+        Valor: mov.valor,
+        Tipo: mov.tipo == 1 ? 'Entrada' : 'Saída'
+      });
     });
 
     return movimentacoes;

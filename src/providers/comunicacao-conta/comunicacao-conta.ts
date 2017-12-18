@@ -114,8 +114,6 @@ export class ComunicacaoContaProvider {
 
   mapeieConta(resp) {
 
-    debugger;
-
     let contas: Conta[] = [];
 
     resp.forEach(t => {
