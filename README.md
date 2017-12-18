@@ -1,5 +1,12 @@
 # view-banco
-Implementação do cliente do projeto de banco para a disciplina de frameworks e componentes.
+Implementação do cliente do projeto de banco para a disciplina de frameworks e componentes. 
+
+Tecnologias utilizadas:
+  * ionic 3
+  * angular 4
+  * typescript
+  * sass
+  * html 5
 
 # Executando o projeto
 
