@@ -53,7 +53,7 @@ export class EditarContaPage {
 
   gravar() {
 
-    if (!this.conta.Banco) {
+    if (!this.bancoSelecionado) {
 
       this.dialogo.exibaToastAlerta('Informe o banco da conta!');
 
@@ -73,6 +73,8 @@ export class EditarContaPage {
 
       return;
     }
+
+    this.conta.Banco = this.bancos.find(b => b.Id == this.bancoSelecionado);
 
     this.events.publish('home:adicionarConta', this.conta);
 

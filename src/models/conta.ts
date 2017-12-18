@@ -8,4 +8,5 @@ export class Conta {
     public Numero: number;
     public Titular: string;
     public Banco: Banco;
+    public Saldo: number;
 }

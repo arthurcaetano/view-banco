@@ -18,7 +18,6 @@ export class CadastroMovimentacaoPage {
     private comunicacaoConta: ComunicacaoContaProvider) {
   }
 
-
   ionViewDidEnter() {
 
     this.comunicacaoConta

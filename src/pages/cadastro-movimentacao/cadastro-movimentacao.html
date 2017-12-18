@@ -14,7 +14,7 @@
   
         <ion-label>{{conta.Numero}} - {{conta.Titular}}</ion-label>
         <ion-label>{{conta.Banco.Descricao}}</ion-label>
-        <ion-label>Saldo $155,00</ion-label>
+        <ion-label>Saldo {{conta.Saldo | currency:'BRL':true}}</ion-label>
 
         <ion-icon name="md-calculator" item-end title="Movimentar"></ion-icon>
       </button>

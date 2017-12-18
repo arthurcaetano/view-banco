@@ -14,12 +14,14 @@ export class ComunicacaoMovimentacaoProvider {
 
   }
 
-  obtenha(removerLoading: boolean = true) {
+  obtenha(idConta: number, removerLoading: boolean = true) {
 
     this.dialogo.exibaLoadingPadrao();
 
+    let servico = `${urlApi}/${idConta}`;
+    
     return this.http
-      .get(urlApi)
+      .get(servico)
       .toPromise()
       .then((resp: any) => {
 
@@ -67,7 +69,7 @@ export class ComunicacaoMovimentacaoProvider {
 
     let movimentacoes: Movimentacao[] = [];
 
-    resp.forEach(t => {
+    resp.movimentacao.forEach(t => {
 
       //movimentacoes.push();
     });

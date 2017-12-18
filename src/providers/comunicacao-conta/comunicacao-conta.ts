@@ -70,7 +70,7 @@ export class ComunicacaoContaProvider {
           cpfCnpj: "73609542829",
           tipoConta: 1,
           tipoPessoa: 1,
-          idBanco: conta.Banco.Id,
+          idBancoAgencia: conta.Banco.Id,
           movimentacao: []
         })
         .toPromise()
@@ -114,15 +114,28 @@ export class ComunicacaoContaProvider {
 
   mapeieConta(resp) {
 
+    debugger;
+
     let contas: Conta[] = [];
 
     resp.forEach(t => {
+
+      let saldo: number = 0;
+
+      t.movimentacao.forEach(mov => {
+        if (mov.tipo == 1) {
+          saldo += mov.valor;
+        } else {
+          saldo -= mov.valor;
+        }
+      });
 
       contas.push({
         Id: t.id,
         Titular: t.titular,
         Numero: t.numero,
-        Banco: this.bancos.find(b => b.Id == t.idBanco)
+        Banco: this.bancos.find(b => b.Id == t.idBancoAgencia),
+        Saldo: saldo
       });
     });
 

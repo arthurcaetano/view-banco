@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Movimentacao } from '../../../models/movimentacao';
 import { ComunicacaoMovimentacaoProvider } from '../../../providers/comunicacao-movimentacao/comunicacao-movimentacao';
 import { DialogoProvider } from '../../../providers/dialogo/dialogo';
+import { Conta } from '../../../models/conta';
 
 @IonicPage()
 @Component({
@@ -11,33 +12,17 @@ import { DialogoProvider } from '../../../providers/dialogo/dialogo';
 })
 export class EditarMovimentacaoPage {
 
-  saldo: number = 1234656;
-
   movimentacao: Movimentacao = new Movimentacao();
-
-  movimentacoes: Movimentacao[] = [{
-    Id: 1,
-    Data: new Date(),
-    Valor: 150,
-    Descricao: 'supermercado',
-    Tipo: 'Saida',
-    Conta: {
-      Id: 1,
-      Banco: {
-        Id: 1,
-        Agencia: 123,
-        Descricao: 'banco 1'
-      },
-      Numero: 1234,
-      Titular: 'Arthur Caetano'
-    }
-  }];
+  conta: Conta;
+  movimentacoes: Movimentacao[] = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private dialogo: DialogoProvider,
     private comunicacaoMovimentacao: ComunicacaoMovimentacaoProvider) {
+
+      this.conta = this.navParams.get('Conta');
   }
 
   excluir(movimentacao: Movimentacao) {
@@ -65,12 +50,12 @@ export class EditarMovimentacaoPage {
       .adicionar(this.movimentacao)
       .then(() => {
 
-        this.comunicacaoMovimentacao
-          .obtenha()
-          .then(movimentacoes => {
+        // this.comunicacaoMovimentacao
+        //   .obtenha()
+        //   .then(movimentacoes => {
 
-            this.movimentacoes = movimentacoes;
-          });
+        //     this.movimentacoes = movimentacoes;
+        //   });
 
         this.movimentacao = new Movimentacao();
       });
